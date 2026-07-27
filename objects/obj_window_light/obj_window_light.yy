@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"lighting",
-    "path":"folders/objects/props and lighting/events/Sofi/lighting.yy",
+    "path":"folders/objects/props and lighting/lighting.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -46,56 +46,22 @@ function light_set_ambient(_r, _g, _b, _instant = false) {
 }
 
 
-function scr_light_equip(char, item) {
-    if (instance_exists(char.light_item)) {
-        scr_light_unequip(char);
+function light_on(_item, _x, _y) {
+    if (is_undefined(_item)) return false;
+    if (_item.durability <= 0) return false;
+    _item.lit = true;
+    if (_item.light_ref == -1) {
+        _item.light_ref = light_add(_x, _y, _item.radius, _item.strength,
+                                    _item.type, _item.cr, _item.cg, _item.cb);
     }
-
-    char.light_item  = item;
-    char.has_light   = true;
-    item.owner       = char;
-    item.is_equipped = true;
-
-    // Linterna: luz sale desde el punto de aim
-    var _lx = (item.light_type == "flashlight") ? item.aim_x : char.x;
-    var _ly = (item.light_type == "flashlight") ? item.aim_y : char.y;
-
-    item.my_light_id = light_add(
-        _lx, _ly,
-        item.light_radius,
-        item.light_strength,
-        item.light_type,
-        item.light_r, item.light_g, item.light_b
-    );
+    return true;
 }
-
-
-
-function scr_light_unequip(char) {
-    var _item = char.light_item;
-    if (!instance_exists(_item)) exit;
-
-    _item.is_equipped = false;
-    if (_item.my_light_id != -1) {
-        light_remove(_item.my_light_id);
-        _item.my_light_id = -1;
-    }
-
-    char.light_item = noone;
-    char.has_light  = false;
-}
-
-function scr_light_extinguish(item) {
-    if (item.my_light_id != -1) {
-        light_remove(item.my_light_id);
-        item.my_light_id = -1;
-    }
-    item.is_equipped  = false;
-    item.is_flickering = false;
-
-    if (instance_exists(item.owner)) {
-        item.owner.light_item = noone;
-        item.owner.has_light  = false;
+function light_off(_item) {
+    if (is_undefined(_item)) return;
+    _item.lit = false;
+    if (_item.light_ref != -1) {
+        light_remove(_item.light_ref);
+        _item.light_ref = -1;
     }
 }
 

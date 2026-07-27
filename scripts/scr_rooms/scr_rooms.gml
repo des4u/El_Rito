@@ -196,7 +196,6 @@ function party_spawn() {
         }
 
         var _inst = instance_create_layer(_sx, _sy, "characters", _obj);
-        scr_inventory_load(_inst, _key);
         _inst.party_index = i;
         _inst.ai_stance   = key_to_stance(_key);
 
@@ -231,8 +230,6 @@ function npc_spawn(_obj, _px, _py, _stance) {
 
 
 function door_goto(_target_room, _door_id) {
-    scr_inventory_save();
-    global.inventory_saved = true;
     global.prev_door_id = _door_id;
     global.from_door = true;
     global.party_traveling = [];

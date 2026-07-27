@@ -9,7 +9,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Arquitectura decidida (no cambiar sin preguntar)
 - La party es EXPLÍCITA: solo cambia vía `party_set([...])`. No derivarla de flags de eventos.
-- `globals_init()` es la única fuente de globals. No inicializar globals en Create de otros objetos.
 - `scr_cutscene_stage()` corre en Room Start, no en Step. Ahí van posiciones iniciales y locks.
 - Patrón de cases: un case HACE algo y avanza inmediato; otro case solo ESPERA.
   Nunca un case que hace algo Y se queda ejecutándolo cada frame.
@@ -17,6 +16,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `delay(seg, id)` usa static compartido: cada controlador usa su propio rango de ids.
 - Los structs de diálogo declaran TODOS los campos en el constructor (`??` truena si el campo no existe).
 
+# NO EDITAR SIN AVISAR
+- GMS2 es muy sensible, todo solo dime que quieres hacer y yo lo copio y pego manual
 
 ## No tocar sin avisar
 - `El Rito.yyp` y los archivos `.yy` (los maneja el IDE)

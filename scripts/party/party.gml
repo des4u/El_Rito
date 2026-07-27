@@ -17,7 +17,8 @@ function scr_ai_update(char) {
     var _dist     = point_distance(char.x, char.y, _leader.x, _leader.y);
     var _darkness = scr_get_darkness();
     var _is_dark  = _darkness < 0.25;
-    var _has_light = char.has_light && instance_exists(char.light_item);
+    var _it = char_item_get(char.char_name);
+	var _has_light = !is_undefined(_it) && _it.lit;
 
     // ── INIT VARS DE IA (si no existen) ────────────
     if (!variable_instance_exists(char, "ai_move_axis"))     char.ai_move_axis = 0;
@@ -501,62 +502,3 @@ function scr_ai_update_look(char) {
 }
 
 
-function scr_inventory_save() {
-    for (var i = 0; i < array_length(global.party); i++) {
-        var _key  = global.party[i];
-        var _inst = party_get_instance(_key);
-        if (!instance_exists(_inst)) continue;
-
-        // Guardar lista de items
-        var _items = [];
-        for (var j = 0; j < ds_list_size(_inst.inventory); j++) {
-            var _item = ds_list_find_value(_inst.inventory, j);
-            if (!instance_exists(_item)) continue;
-            array_push(_items, {
-                obj        : _item.object_index,
-                durability : _item.durability
-            });
-        }
-        global.char_inventory[$ _key] = _items;
-
-        // Guardar item equipado
-        if (instance_exists(_inst.light_item)) {
-            global.char_light[$ _key] = {
-                obj        : _inst.light_item.object_index,
-                durability : _inst.light_item.durability
-            };
-        } else {
-            global.char_light[$ _key] = undefined;
-        }
-    }
-}
-
-function scr_inventory_load(inst, key) {
-    if (!variable_struct_exists(global.char_inventory, key)) exit;
-
-    var _items = global.char_inventory[$ key];
-    if (array_length(_items) == 0) exit;
-
-    for (var j = 0; j < array_length(_items); j++) {
-        var _data = _items[j];
-        var _item = instance_create_layer(inst.x, inst.y, "Instances", _data.obj);
-        _item.durability = _data.durability;
-        _item.owner      = inst;
-        _item.visible    = false;
-        ds_list_add(inst.inventory, _item);
-    }
-
-    // Restaurar item equipado
-    if (variable_struct_exists(global.char_light, key)) {
-        var _light_data = global.char_light[$ key];
-        if (!is_undefined(_light_data)) {
-            for (var j = 0; j < ds_list_size(inst.inventory); j++) {
-                var _item = ds_list_find_value(inst.inventory, j);
-                if (_item.object_index == _light_data.obj) {
-                    scr_light_equip(inst, _item);
-                    break;
-                }
-            }
-        }
-    }
-}

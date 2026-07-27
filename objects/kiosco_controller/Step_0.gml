@@ -128,7 +128,7 @@ switch (global.kioscoevent) {
         break;
 
     case 9.6:
-        if (dialog_is_done() && cs_walk_done(carlos_inst) && cs_walk_done(alberto_inst)) {
+        if (dialog_is_done()) {
             global.kioscoevent = 10;
         }
         break;
@@ -163,7 +163,32 @@ switch (global.kioscoevent) {
 		global.kioscoevent = 11;
 		break;
 	case 11:
-		
+		stash_add_type("flashlight");
+		stash_add_type("flashlight");
+		stash_add_type("candle");
+		global.inv_unlocked = true;
+		global.kioscoevent = 11.5;
+		break;
+
+	case 11.5:
+		if (dialog_is_done()) global.kioscoevent = 12;
+		break;
+
+	case 12:
+		dialog_start([
+			dialog_tooltip_wait("Presiona R para abrir el inventario"),
+			dialog_tooltip_wait("Arrastra los objetos con el mouse para asignarlos a cada personaje"),
+			dialog_tooltip_wait("Usa F para encender la luz de un personaje con luz equipada")
+		]);
+		global.kioscoevent = 12.5;
+		break;
+
+	case 12.5:
+		if (dialog_is_done()) global.kioscoevent = 13;
+		break;
+
+	case 13:
+		break;
 		
 		
 }

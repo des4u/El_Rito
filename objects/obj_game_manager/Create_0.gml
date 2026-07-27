@@ -13,7 +13,6 @@ global.from_door = false;
 global.controlled_key = "";
 
 global.controlled = noone;
-global.inventory_saved = false;
 
 if (variable_global_exists("__gm_initialized")) {
     instance_destroy();
@@ -21,8 +20,10 @@ if (variable_global_exists("__gm_initialized")) {
 }
 global.__gm_initialized = true;
 
-global.char_inventory = {};
-global.char_light     = {};
+global.stash        = [];
+global.char_item    = {};
+global.inv_open     = false;
+global.inv_unlocked = false;
 
 persistent = true;
 

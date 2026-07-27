@@ -9,7 +9,8 @@ if (!sprite_initialized) {
     sprite_initialized = true;
 }
 
-if (id == global.controlled && !global.switching && !cutscene_locked) {
+if (id == global.controlled && !global.switching && !cutscene_locked && !global.inv_open) {
+	
     input_x = (keyboard_check(ord("D")) - keyboard_check(ord("A")));
     input_y = (keyboard_check(ord("S")) - keyboard_check(ord("W")));
     if (input_x != 0 && input_y != 0) input_y = 0;
@@ -100,15 +101,12 @@ if (!cutscene_locked) {
     }
 }
 
-if (id == global.controlled && keyboard_check_pressed(ord("F"))) {
-    if (has_light) {
-        scr_light_unequip(id);
-    } else if (ds_list_size(inventory) > 0) {
-        scr_light_equip(id, ds_list_find_value(inventory, 0));
-    }
+if (id == global.controlled && !global.inv_open && !cutscene_locked && !dialog_blocks_input()
+    && keyboard_check_pressed(ord("F"))) {
+    char_light_toggle(char_name);
 }
 
-if (id != global.controlled && !global.switching && !cutscene_locked) {
+if (id != global.controlled && !global.switching && !cutscene_locked && !global.inv_open) {
     scr_ai_update(id);
 }
 

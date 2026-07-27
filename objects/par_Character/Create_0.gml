@@ -10,13 +10,6 @@ player_vision_enabled = true;
 player_vision_radius  = 220;    
 
 
-light_item  = noone;  
-light_id    = -1;     
-has_light   = false;
-
-
-inventory   = ds_list_create();
-
 
 visibility_light_id = light_add(x, y, 40, 0.3, "body", 0.8, 0.8, 0.9);
 
