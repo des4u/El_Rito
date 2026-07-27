@@ -1,0 +1,52 @@
+Note to Self:
+	he notado que a veces escribo funciones en inglés y otras en español...
+
+10/04/2026
+Hoy empece por la puerta de mi casa:
+	Hice los efectos VHS
+	Transiciones
+	Y una pequeña parte del inicio del juego, controles y movimiento del jugador.
+Mañana le pedire a Juli y a Deni que si pueden empezar a hacer los primeros fondos y los sprites de nuestra 
+Sofi.
+
+El primer fondo seria:
+rm_sofi
+rm_sofi_hall
+rm_sofi_kitchen
+rm_sofi_tv
+
+Despues:
+rm_sofi_outside_1
+rm_sofi_outside_2
+
+
+Los sprites por su parte son:
+(estos pueden esperar)
+spr_sofi_idle 
+spr_sofi_walk_n
+spr_sofi_walk_up
+spr_sofi_walk_down
+
+yy los de retratos:
+spr_sofi_port_sad
+spr_sofi_port_tired
+spr_sofi_port_mad
+
+11/04/2026
+Avance tantito con el sistema de iluminación y arregle los dialogos
+12/04/2026
+Hoy planeo avanzar hasta tener lista la primera zona de la presentacion, con esto ya podemos hacer cutscenes y basicamente
+funcionamiento basico del juego
+con eso tenemos la introducción lista y preparada para recibir los sprites.
+
+Tengo el presentimiento de que la dibujante de sprites va a renunciar, asi que fondos va a tener que tomar su lugar
+Sino, conseguire otro dibujante pronto.
+
+actualización, si dimitio JAJAJA.
+
+Es hora de pensar mas en que hacer.
+
+19/07/2026
+Despues del descanso regresamos al desarrollo.
+ya hemos terminado la introducción, asi que es hora de empoezar a hacer lka escena del kiosco y el GUI.
+Ademas de eso hay que terminar de hacer la primera intro

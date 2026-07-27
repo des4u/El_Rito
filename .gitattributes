@@ -1,0 +1,12 @@
+*.yy linguist-generated=true
+
+* -text
+
+*.gml text eol=lf
+*.yy text eol=lf
+*.yyp text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.shader text eol=lf
+*.vsh text eol=lf
+*.fsh text eol=lf

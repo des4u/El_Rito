@@ -1,0 +1,27 @@
+// En el Create de un obj_vela:
+mi_luz = light_add(x, y, 80, 0.9, "candle", 0.9, 0.75, 0.4);
+
+// En el Step si el objeto se mueve:
+light_move(mi_luz, x, y);
+
+// En el Clean Up del obj_vela:
+light_remove(mi_luz);
+
+
+// Ventana con luz fria de luna
+luz_ventana = light_add(320, 150, 200, 0.6, "window", 0.6, 0.7, 1.0);
+
+// Linterna que carga el jugador
+luz_linterna = light_add(x, y, 120, 1.0, "lantern", 0.75, 0.85, 1.0);
+// Step del jugador:
+light_move(luz_linterna, x, y);
+
+
+// Cambiar ambiente a noche cerrada
+light_set_ambient(0.02, 0.02, 0.06);
+
+// Amanecer
+light_set_ambient(0.4, 0.3, 0.2);
+
+// Interior con luz tenue
+light_set_ambient(0.08, 0.06, 0.10);

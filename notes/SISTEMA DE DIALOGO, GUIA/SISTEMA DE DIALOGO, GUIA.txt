@@ -1,0 +1,41 @@
+// Dialogo simple con retrato
+dialog_start([
+    dialog_line("No debí haber venido aquí.", "Sofía", spr_sofia_portrait, 0),
+    dialog_line("Esto no está bien...",        "Sofía", spr_sofia_portrait, 1),
+    dialog_line("",                            "",      -1,                 0)
+]);
+
+// Linea sin retrato ni nombre (narración)
+dialog_line("El cuarto huele a podrido.", "", -1, 0);
+
+// Linea con timer obligatorio (cutscene, no se puede skipear)
+dialog_line_timed("LALALALLALALA", "", -1, 0, 3.0);
+
+// Linea con elecciones
+dialog_line_choices(
+    "¿Qué haces?",
+    "Sofía", spr_sofia_portrait, 0,
+    ["Abrir la puerta", "Quedarte quieta", "Gritar"]
+);
+
+// Leer la eleccion despues de que termino
+if (dialog_is_done()) {
+    switch (dialog_choice_result()) {
+        case 0: // abrio la puerta
+            room_goto(rm_pasillo);
+            break;
+        case 1: // se quedo quieta
+            dialog_start([ dialog_line("...", "Sofía", spr_sofia_portrait, 0) ]);
+            break;
+        case 2: // gritó
+            // algo pasa
+            break;
+    }
+}
+
+// Dialogo mientras el jugador sigue jugando (no bloquea input)
+// Solo activa el dialogo y deja que el jugador se mueva
+dialog_start([
+    dialog_line_timed("¿Qué fue ese ruido?", "Sofía", spr_sofia_portrait, 0, 2.5),
+    dialog_line_timed("...",                 "Sofía", spr_sofia_portrait, 0, 1.5),
+]);

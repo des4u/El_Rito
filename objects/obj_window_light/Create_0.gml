@@ -1,0 +1,1 @@
+luz_ventana = light_add(x, y, 200, 1.5, "window", 0.6, 0.7, 1.0);

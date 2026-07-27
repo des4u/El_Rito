@@ -1,0 +1,1 @@
+global.cam_needs_snap = true;

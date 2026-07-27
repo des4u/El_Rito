@@ -1,0 +1,1 @@
+light_remove(visibility_light_id);

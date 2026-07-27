@@ -1,0 +1,1 @@
+if (my_light_id != -1) light_remove(my_light_id);
