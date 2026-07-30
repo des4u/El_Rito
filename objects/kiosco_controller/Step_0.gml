@@ -190,12 +190,20 @@ switch (global.kioscoevent) {
 	case 13:
 		if room = rm_plaza_arcs {
 			dialog_start([
-				dialog_line("Casi ni hay nadie en las calles", "Alberto",-1,0),
-				dialog_line("Bueno, hay gente en el mercado", "Carlos",-1,0),
-				dialog_line("Tú estarias en la iglesia sino hubieramos quedado en nada hoy", "Alberto",-1,0),
-				dialog_line("Si, porque tengo que hacer mi comunión", "Carlos",-1,0),
-				dialog_line("...Ademas fuí en la mañana", "Carlos",-1,0)
-				
+				dialog_line("Wey, Carlos", "Alberto",-1,0),
+				dialog_line("Mandé", "Carlos",-1,0),
+				dialog_line("¿Por qué no estás en la iglesía?", "Alberto",-1,0),
+				dialog_line("Fuí en la mañana we", "Carlos",-1,0),
+				dialog_line("Ah claro", "Alberto",-1,0),
+				dialog_line("Como convenciste a tus padres de venir aca", "Carlos",-1,0),
+				dialog_line("No ps", "Alberto",-1,0),
+				dialog_line("Les dije que me íba a quedar en tu casa", "Alberto",-1,0),
+				dialog_line("No mames Alberto, te dije que dijeras que a casa de Santiago", "Carlos",-1,0),
+				dialog_line("Mi Mamá se va a poner histerica si se entera", "Carlos",-1,0),
+				double_dialogue("Con eso de que ya no me deja salir desde que desapareció Carlota", "Carlos",-1,0,"Chingadamadre' no, me dijiste que tu casa", "Alberto",-1,0),
+				dialog_line("...", "",-1,0),
+				dialog_line("Pero si te vas a meter al cerro de noche o vas a estar de miedoso Alberto", "Santiago",-1,0),
+				dialog_line("Tú callate Santiago", "Alberto",-1,0)
 		]);		
 		}
 		break;
