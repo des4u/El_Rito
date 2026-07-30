@@ -137,15 +137,43 @@ function spawn_get(_room_id, _door_id) {
     return { x: 64, y: 64 };
 }
 
+function spawn_resolve(_door_id) {
+    var _m = 40;
+    with (obj_door) {
+        if (door_id != _door_id) continue;
+        var _cx = (bbox_left + bbox_right) * 0.5;
+        var _cy = (bbox_top + bbox_bottom) * 0.5;
+        switch (exit_dir) {
+            case "up":    return { x: _cx, y: bbox_top - _m, dir: "up" };
+            case "down":  return { x: _cx, y: bbox_bottom + _m, dir: "down" };
+            case "left":  return { x: bbox_left - _m, y: _cy, dir: "left" };
+            case "right": return { x: bbox_right + _m, y: _cy, dir: "right" };
+        }
+        return { x: _cx, y: _cy, dir: "down" };
+    }
+    var _p = spawn_get(room, _door_id);
+    return { x: _p.x, y: _p.y, dir: "down" };
+}
 
 function party_spawn() {
     global.party_instances = {};
     global.controlled = noone;
 
-    var _pos = spawn_get(room, global.prev_door_id);
+    if (room == game_1_presentation || room == game_1_realhistory) { //si, se que es un poco... raro, pero pondre todos los rooms de transición o escenas aquí para evitar bugs
+        global.party_traveling = [];
+        exit;
+    }
+
+    var _pos = spawn_resolve(global.prev_door_id);
     var _px  = _pos.x;
     var _py  = _pos.y;
-
+    var _odx = 0, _ody = 0;
+    switch (_pos.dir) {
+        case "up":    _ody = -20; break;
+        case "down":  _ody =  20; break;
+        case "left":  _odx = -20; break;
+        default:      _odx =  20; break;
+    }
     var _rk = string(room);
     var _stationed_here = variable_struct_exists(global.party_stationed, _rk)
         ? global.party_stationed[$ _rk]
@@ -190,9 +218,9 @@ function party_spawn() {
             _sx = _data.x;
             _sy = _data.y;
         } else {
-            _sx = _px + _offset;
-            _sy = _py;
-            _offset += 20;
+            _sx = _px + _odx * _offset;
+            _sy = _py + _ody * _offset;
+            _offset += 1;
         }
 
         var _inst = instance_create_layer(_sx, _sy, "characters", _obj);
@@ -203,7 +231,7 @@ function party_spawn() {
         if (_stationed) {
             _inst.cutscene_locked = true;
         }
-
+        if (!_stationed) cs_face(_inst, _pos.dir);
         global.party_instances[$ _key] = _inst;
 
         if (_key == global.controlled_key) {
@@ -219,7 +247,7 @@ function party_spawn() {
         }
     }
 }
-    global.party_traveling = [];
+
 
 
 function npc_spawn(_obj, _px, _py, _stance) {
@@ -283,43 +311,15 @@ function scr_switch_character(_direction) {
 function scr_register_spawns() {
 
     spawn_register_default(rm_test_1, 313, 224);
-    spawn_register(rm_test_1, "door_test2_down", 132, 169);
-    spawn_register(rm_test_1, "door_test2_up",   379, 322);
-
     spawn_register_default(rm_test_2, 313, 224);
-    spawn_register(rm_test_2, "door_test1_down", 132, 169);
-    spawn_register(rm_test_2, "door_test1_up",   379, 322);
-	
     spawn_register_default(rm_sofi, 388, 193);
-    spawn_register(rm_sofi, "door_hall-sofi", 314, 192);
-
-    spawn_register_default(rm_sofi_hall, 313, 224);
-    spawn_register(rm_sofi_hall, "door_sofi-hall", 192, 188);
-    spawn_register(rm_sofi_hall, "door_kitchen-hall", 400, 212);	
-	
+    spawn_register_default(rm_sofi_hall, 313, 224);	
     spawn_register_default(rm_sofi_kitchen, 313, 224);
-    spawn_register(rm_sofi_kitchen, "door_hall-kitchen", 277, 196);
-    spawn_register(rm_sofi_kitchen, "door_tv-kitchen", 455, 355);	
-	spawn_register(rm_sofi_kitchen, "out-inside", 277, 196);
-	
     spawn_register_default(rm_sofi_tv_LEGACY, 313, 224);
-    spawn_register(rm_sofi_tv_LEGACY, "door_kitchen-tv", 450, 140);
-
     spawn_register_default(rm_sofi_outside_down, 315, 251);
-    spawn_register(rm_sofi_outside_down, "out_right-down", 444,221);
-    spawn_register(rm_sofi_outside_down, "out_town-down", 331, 316);
-	spawn_register(rm_sofi_outside_down, "insides-out", 314, 156);
-	
-	
     spawn_register_default(rm_sofi_outside_right, 338, 340);
-    spawn_register(rm_sofi_outside_right, "out_down-right", 316, 320);
-    spawn_register(rm_sofi_outside_right, "out_up-right", 321, 73);
-
-    spawn_register_default(rm_sofi_outside_up, 541, 220);
-    spawn_register(rm_sofi_outside_up, "out_right-up", 507, 220);
-	
+    spawn_register_default(rm_sofi_outside_up, 541, 220);	
 	spawn_register_default(rm_plaza_kiosco, 238, 338);
-	spawn_register(rm_plaza_kiosco,"right-kiosco",522,356);
 	
 	
 }

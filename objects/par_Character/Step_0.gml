@@ -9,7 +9,7 @@ if (!sprite_initialized) {
     sprite_initialized = true;
 }
 
-if (id == global.controlled && !global.switching && !cutscene_locked && !global.inv_open) {
+if (id == global.controlled && !global.switching && !cutscene_locked && !global.inv_open && !transition_blocks_input()) {
 	
     input_x = (keyboard_check(ord("D")) - keyboard_check(ord("A")));
     input_y = (keyboard_check(ord("S")) - keyboard_check(ord("W")));
@@ -21,7 +21,7 @@ if (id == global.controlled && !global.switching && !cutscene_locked && !global.
         var _block_x = false;
         if (place_meeting(x + input_x * move_speed, y, obj_Collision)) _block_x = true;
         var _dr = instance_place(x + input_x * move_speed, y, obj_doorParent);
-        if (_dr != noone) { _block_x = true; _door_hit = _dr; }
+        if (_dr != noone && !place_meeting(x, y, _dr)) { _block_x = true; _door_hit = _dr; }
         var _ev = instance_place(x + input_x * move_speed, y, obj_Collision_event);
         if (_ev != noone && _ev.active) _block_x = true;
         if (_block_x) {
@@ -40,7 +40,7 @@ if (id == global.controlled && !global.switching && !cutscene_locked && !global.
         var _block_y = false;
         if (place_meeting(x, y + input_y * move_speed, obj_Collision)) _block_y = true;
         var _dr2 = instance_place(x, y + input_y * move_speed, obj_doorParent);
-        if (_dr2 != noone) { _block_y = true; _door_hit = _dr2; }
+        if (_dr2 != noone && !place_meeting(x, y, _dr2)) { _block_y = true; _door_hit = _dr2; }
         var _ev = instance_place(x, y + input_y * move_speed, obj_Collision_event);
         if (_ev != noone && _ev.active) _block_y = true;
         if (_block_y) {
@@ -106,7 +106,7 @@ if (id == global.controlled && !global.inv_open && !cutscene_locked && !dialog_b
     char_light_toggle(char_name);
 }
 
-if (id != global.controlled && !global.switching && !cutscene_locked && !global.inv_open) {
+if (id != global.controlled && !global.switching && !cutscene_locked && !global.inv_open && !transition_blocks_input()) {
     scr_ai_update(id);
 }
 

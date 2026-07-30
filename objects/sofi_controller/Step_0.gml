@@ -53,7 +53,7 @@ switch (global.sofievent) {
 			obj_shader_controller.vhs_intensity = 0.7;
 			instance_destroy(obj_haunted_window);
 			audio_sound_gain(snd_vhs, 1);
-			if (instance_exists(obj_doorkitchen_hall)) instance_destroy(obj_doorkitchen_hall);
+			if (instance_exists(obj_door)) instance_destroy(obj_door);
 			dialog_start([
 				dialog_line_timed("...", "", -1, 0, 2.0)
 			]);

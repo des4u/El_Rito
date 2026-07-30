@@ -39,9 +39,9 @@ draw_text_transformed(_L.px + 20, _L.py + 14, "INVENTARIO", 1.1, 1.1, 0);
 
 draw_set_font(font_body);
 draw_set_color(make_color_rgb(150, 150, 160));
-draw_text_transformed(_L.px + 20, _L.py + 46, "PERSONAJES", 0.9, 0.9, 0);
-draw_text_transformed(_L.px + 20, _L.py + 170, "MOCHILA", 0.9, 0.9, 0);
-draw_text_transformed(_L.px + 20, _L.py + 268, "CONTROLES", 0.9, 0.9, 0);
+draw_text_transformed(_L.px + 20, _L.py + 50, "PERSONAJES", 0.9, 0.9, 0);
+draw_text_transformed(_L.px + 20, _L.py + 218, "MOCHILA", 0.9, 0.9, 0);
+draw_text_transformed(_L.px + 20, _L.py + 346, "CONTROLES", 0.9, 0.9, 0);
 
 for (var i = 0; i < array_length(_L.chars); i++) {
     var _c    = _L.chars[i];
@@ -71,9 +71,9 @@ for (var i = 0; i < STASH_MAX; i++) {
 
 draw_set_font(font_body);
 draw_set_color(make_color_rgb(160, 160, 154));
-draw_text_transformed(_L.px + 20, _L.py + 292, "Arrastra con el MOUSE para asignar objetos", 0.8, 0.8, 0);
-draw_text_transformed(_L.px + 20, _L.py + 312, "F - encender / apagar la luz del personaje activo", 0.8, 0.8, 0);
-draw_text_transformed(_L.px + 20, _L.py + 332, "Q / E - cambiar personaje       R o ESC - cerrar", 0.8, 0.8, 0);
+draw_text_transformed(_L.px + 20, _L.py + 372, "Arrastra con el MOUSE para asignar objetos", 0.8, 0.8, 0);
+draw_text_transformed(_L.px + 20, _L.py + 392, "F - encender / apagar la luz del personaje activo", 0.8, 0.8, 0);
+draw_text_transformed(_L.px + 20, _L.py + 412, "R o ESC - cerrar", 0.8, 0.8, 0);
 
 if (!is_undefined(drag_item)) {
     draw_set_color(c_white);

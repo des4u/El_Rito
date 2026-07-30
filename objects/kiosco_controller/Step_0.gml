@@ -1,4 +1,4 @@
-cs_walk_update();
+ cs_walk_update();
 tiempo += 1;
 //ok, que es cs_walk?
 //es para varios personajes caminando a la vez, xd
@@ -188,6 +188,16 @@ switch (global.kioscoevent) {
 		break;
 
 	case 13:
+		if room = rm_plaza_arcs {
+			dialog_start([
+				dialog_line("Casi ni hay nadie en las calles", "Alberto",-1,0),
+				dialog_line("Bueno, hay gente en el mercado", "Carlos",-1,0),
+				dialog_line("Tú estarias en la iglesia sino hubieramos quedado en nada hoy", "Alberto",-1,0),
+				dialog_line("Si, porque tengo que hacer mi comunión", "Carlos",-1,0),
+				dialog_line("...Ademas fuí en la mañana", "Carlos",-1,0)
+				
+		]);		
+		}
 		break;
 		
 		

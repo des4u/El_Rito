@@ -36,3 +36,8 @@ function vhs_fx_stop() {
         fx_active = false;
     }
 }
+
+function transition_blocks_input() {
+    if (!instance_exists(obj_transition_controller)) return false;
+    return (obj_transition_controller.trans_active || obj_transition_controller.fadein_active);
+}

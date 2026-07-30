@@ -6,7 +6,6 @@
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_3BEF982F","path":"rooms/rm_sofi_tv_LEGACY/rm_sofi_tv_LEGACY.yy",},
     {"name":"inst_4D058D65","path":"rooms/rm_sofi_tv_LEGACY/rm_sofi_tv_LEGACY.yy",},
     {"name":"inst_2411C3AA","path":"rooms/rm_sofi_tv_LEGACY/rm_sofi_tv_LEGACY.yy",},
     {"name":"inst_351A5DD0","path":"rooms/rm_sofi_tv_LEGACY/rm_sofi_tv_LEGACY.yy",},
@@ -23,11 +22,10 @@
   "isDnd":false,
   "layers":[
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
-        {"$GMRInstance":"v4","%Name":"inst_636058BF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":true,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_636058BF","objectId":{"name":"obj_house_outside","path":"objects/obj_house_outside/obj_house_outside.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.5833333,"scaleY":1.1666666,"x":346.0,"y":372.0,},
-        {"$GMRInstance":"v4","%Name":"inst_44686389","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_44686389","objectId":{"name":"obj_house_outside","path":"objects/obj_house_outside/obj_house_outside.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.5,"scaleY":1.0,"x":361.0,"y":394.0,},
+        {"$GMRInstance":"v4","%Name":"inst_636058BF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":true,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_636058BF","objectId":{"name":"obj_house_exit","path":"objects/obj_house_exit/obj_house_exit.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.5833333,"scaleY":1.1666666,"x":346.0,"y":372.0,},
+        {"$GMRInstance":"v4","%Name":"inst_44686389","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_44686389","objectId":{"name":"obj_house_exit","path":"objects/obj_house_exit/obj_house_exit.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.5,"scaleY":1.0,"x":361.0,"y":394.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"collisions","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
-        {"$GMRInstance":"v4","%Name":"inst_3BEF982F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3BEF982F","objectId":{"name":"obj_doortv_kitchen","path":"objects/obj_doortv_kitchen/obj_doortv_kitchen.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":13.75,"scaleY":2.8333333,"x":269.0,"y":0.0,},
         {"$GMRInstance":"v4","%Name":"inst_4D058D65","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4D058D65","objectId":{"name":"obj_Collision","path":"objects/obj_Collision/obj_Collision.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":-1.23733,"scaleX":1.1666666,"scaleY":5.9583335,"x":241.0,"y":0.0,},
         {"$GMRInstance":"v4","%Name":"inst_2411C3AA","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2411C3AA","objectId":{"name":"obj_Collision","path":"objects/obj_Collision/obj_Collision.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":5.625,"scaleY":1.0,"x":102.91208,"y":111.0,},
         {"$GMRInstance":"v4","%Name":"inst_351A5DD0","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_351A5DD0","objectId":{"name":"obj_Collision","path":"objects/obj_Collision/obj_Collision.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":12.416667,"x":102.91208,"y":135.0,},
@@ -49,8 +47,8 @@
   ],
   "name":"rm_sofi_tv_LEGACY",
   "parent":{
-    "name":"sofi_house",
-    "path":"folders/Rooms/sofi_house.yy",
+    "name":"templates",
+    "path":"folders/Rooms/templates.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

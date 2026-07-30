@@ -86,28 +86,28 @@ function key_to_display(_key) {
 function inv_layout() {
     var _gw = display_get_gui_width();
     var _gh = display_get_gui_height();
-    var _pw = 620;
-    var _ph = 372;
+    var _pw = 760;
+    var _ph = 460;
     var _px = floor((_gw - _pw) * 0.5);
     var _py = floor((_gh - _ph) * 0.5);
-    var _s   = 56;
-    var _gap = 12;
+    var _s   = 72;
+    var _gap = 16;
     var _chars = [];
     var _n  = array_length(global.party);
     var _rw = _n * _s + max(0, _n - 1) * _gap;
     var _cx = _px + floor((_pw - _rw) * 0.5);
     for (var i = 0; i < _n; i++) {
         array_push(_chars, {
-            key : global.party[i],
-            x   : _cx + i * (_s + _gap),
-            y   : _py + 66
-        });
+			key : global.party[i],
+			x   : _cx + i * (_s + _gap),
+			y   : _py + 80
+		});
     }
     var _stash = [];
     var _sw = STASH_MAX * _s + (STASH_MAX - 1) * _gap;
     var _sx = _px + floor((_pw - _sw) * 0.5);
     for (var i = 0; i < STASH_MAX; i++) {
-        array_push(_stash, { x : _sx + i * (_s + _gap), y : _py + 190 });
+        array_push(_stash, { x : _sx + i * (_s + _gap), y : _py + 248 });
     }
     return {
         px : _px, py : _py, pw : _pw, ph : _ph, s : _s,
