@@ -1,0 +1,1 @@
+if (!armed && !place_meeting(x, y, par_Character)) armed = true;

@@ -1,3 +1,7 @@
+if (instance_number(kiosco_controller) > 1) {
+    instance_destroy();
+    exit;
+}
 cards = [
     { titulo: "El Rito", sub: "" },
 	{ titulo: "Capítulo 1", sub: "Cacería de Brujas" },

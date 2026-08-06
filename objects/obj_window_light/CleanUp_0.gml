@@ -1,0 +1,1 @@
+light_remove(luz_ventana);

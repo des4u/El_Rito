@@ -36,13 +36,14 @@ global.prev_door_id = "";
 
 global.spawn_points = {};
 
-
+global.sun = { active: false, dir: 315, len: 0.8, alpha: 0.35 };
 global.events = {};
 
 
 global.switching = false;
 global.player_idle_timer = 0;
-
+global.hora = 17;
+global.room_exterior = false;
 
 scr_register_spawns();
 party_boot();

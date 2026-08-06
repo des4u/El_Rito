@@ -6,7 +6,7 @@ dialog_active   = false;
 dialog_lines    = [];       
 dialog_index    = 0;        
 dialog_done     = false;   
-
+dialog_free     = false;
 
 tw_text         = "";       
 tw_text2        = "";       

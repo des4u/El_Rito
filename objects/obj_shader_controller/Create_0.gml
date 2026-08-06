@@ -24,6 +24,7 @@ uni_ambient     = shader_get_uniform(shd_vhs_shader, "u_ambient");
 uni_lights      = shader_get_uniform(shd_vhs_shader, "u_lights");
 uni_light_colors= shader_get_uniform(shd_vhs_shader, "u_light_colors");
 uni_light_count = shader_get_uniform(shd_vhs_shader, "u_light_count");
+uni_view_scale = shader_get_uniform(shd_vhs_shader, "u_view_scale");
 window_set_size(VHS_WIN_W, VHS_WIN_H);
 window_center();
 display_set_gui_size(VHS_WIN_W, VHS_WIN_H);

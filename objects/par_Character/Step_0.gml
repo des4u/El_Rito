@@ -9,7 +9,7 @@ if (!sprite_initialized) {
     sprite_initialized = true;
 }
 
-if (id == global.controlled && !global.switching && !cutscene_locked && !global.inv_open && !transition_blocks_input()) {
+if (id == global.controlled && !global.switching && !cutscene_locked && !global.inv_open && !transition_blocks_input() && !dialog_blocks_input()) {
 	
     input_x = (keyboard_check(ord("D")) - keyboard_check(ord("A")));
     input_y = (keyboard_check(ord("S")) - keyboard_check(ord("W")));

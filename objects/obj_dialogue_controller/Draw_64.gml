@@ -43,7 +43,32 @@ draw_set_valign(fa_top);
 
 var _bw_full = _sw - box_margin_x * 2;
 var _bw = cur_is_double ? (_bw_full / 2 - 8) : _bw_full;
-var _bh = box_h;
+
+draw_set_font(dialog_font);
+
+var _has_choices = array_length(cur_choices) > 0;
+var _fit_w = _bw - box_padding * 2;
+if (cur_portrait != -1 || cur_portrait2 != -1) _fit_w -= (portrait_size + box_padding);
+
+var _ts     = text_scale;
+var _inner  = box_h - (box_padding - 2) * 2;
+var _content_h = 0;
+
+while (true) {
+    _content_h = string_height_ext(tw_text, -1, _fit_w / _ts) * _ts;
+    if (cur_is_double) _content_h = max(_content_h, string_height_ext(tw_text2, -1, _fit_w / _ts) * _ts);
+    if (_has_choices) {
+        _content_h += 10;
+        for (var i = 0; i < array_length(cur_choices); i++) {
+            _content_h += string_height(cur_choices[i]) * _ts + 6;
+        }
+    }
+    if (_content_h <= _inner) break;
+    if (_has_choices || _ts <= 1.2) break;
+    _ts -= 0.1;
+}
+
+var _bh = max(box_h, _content_h + (box_padding - 2) * 2);
 var _by = _sh - box_margin_y - _bh;
 var _panels = cur_is_double ? 2 : 1;
 
@@ -134,16 +159,16 @@ for (var p = 0; p < _panels; p++) {
     }
 
     var _text_y = _by + box_padding - 2;
-    var _text_w = _avail / text_scale;
+    var _text_w = _avail / _ts;
 
     draw_set_font(dialog_font);
     draw_set_color(c_black);
     draw_set_alpha(0.85);
-    draw_text_ext_transformed(_text_x + 2, _text_y + 2, _txt, -1, _text_w, text_scale, text_scale, 0);
+    draw_text_ext_transformed(_text_x + 2, _text_y + 2, _txt, -1, _text_w, _ts, _ts, 0);
 
     draw_set_color(make_color_rgb(238, 238, 232));
     draw_set_alpha(1);
-    draw_text_ext_transformed(_text_x, _text_y, _txt, -1, _text_w, text_scale, text_scale, 0);
+    draw_text_ext_transformed(_text_x, _text_y, _txt, -1, _text_w, _ts, _ts, 0);
 
     if (p == 0) {
         _tx0  = _text_x;
@@ -155,28 +180,28 @@ for (var p = 0; p < _panels; p++) {
 
 if (tw_finished && array_length(cur_choices) > 0) {
     draw_set_font(dialog_font);
-    var _cy = _ty0 + string_height_ext(tw_text, -1, _tww0) * text_scale + 10;
+    var _cy = _ty0 + string_height_ext(tw_text, -1, _tww0) * _ts + 10;
     for (var i = 0; i < array_length(cur_choices); i++) {
-        var _ch = string_height(cur_choices[i]) * text_scale;
+        var _ch = string_height(cur_choices[i]) * _ts;
         if (i == choice_index) {
             draw_set_color(c_white);
             draw_set_alpha(0.07);
-            draw_rectangle(_tx0 - 6, _cy - 2, _tx0 + 26 + string_width(cur_choices[i]) * text_scale, _cy + _ch + 2, false);
+            draw_rectangle(_tx0 - 6, _cy - 2, _tx0 + 26 + string_width(cur_choices[i]) * _ts, _cy + _ch + 2, false);
 
             draw_set_color(c_black);
             draw_set_alpha(0.8);
-            draw_text_transformed(_tx0 + 22, _cy + 2, cur_choices[i], text_scale, text_scale, 0);
+            draw_text_transformed(_tx0 + 22, _cy + 2, cur_choices[i], _ts, _ts, 0);
             draw_set_color(make_color_rgb(230, 210, 120));
             draw_set_alpha(1);
-            draw_text_transformed(_tx0 + 20, _cy, cur_choices[i], text_scale, text_scale, 0);
+            draw_text_transformed(_tx0 + 20, _cy, cur_choices[i], _ts, _ts, 0);
 
             if ((current_time mod 700) < 450) {
-                draw_text_transformed(_tx0, _cy, ">", text_scale, text_scale, 0);
+                draw_text_transformed(_tx0, _cy, ">", _ts, _ts, 0);
             }
         } else {
             draw_set_color(make_color_rgb(150, 150, 150));
             draw_set_alpha(0.7);
-            draw_text_transformed(_tx0 + 20, _cy, cur_choices[i], text_scale, text_scale, 0);
+            draw_text_transformed(_tx0 + 20, _cy, cur_choices[i], _ts, _ts, 0);
         }
         draw_set_alpha(1);
         _cy += _ch + 6;

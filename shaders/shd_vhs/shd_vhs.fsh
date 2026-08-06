@@ -14,7 +14,7 @@ uniform sampler2D u_shadowmap;
 
 uniform vec2  u_player_pos;
 uniform float u_player_radius;
-
+uniform vec2 u_view_scale;
 float hash(float n)  { return fract(sin(n) * 43758.5453); }
 float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 
@@ -88,9 +88,9 @@ void main() {
     vec3 light_accum = u_ambient;
 
     for (int i = 0; i < 16; i++) {
-        float fi     = float(i);
-        float active = step(fi, float(u_light_count) - 1.0);
+        if (i >= u_light_count) break;
 
+        float fi      = float(i);
         float lx      = u_lights[i].x / u_resolution.x;
         float ly      = u_lights[i].y / u_resolution.y;
         float lradius = u_lights[i].z;
@@ -113,20 +113,21 @@ void main() {
         float pulse     = sin(t * 2.0 + seed) * 0.02;
         lbright *= 1.0 + pulse * is_window;
 
-        float dx      = (uv.x - lx) * u_resolution.x;
-        float dy      = (uv.y - ly) * u_resolution.y;
+        float dx      = (uv.x - lx) * u_resolution.x / u_view_scale.x;
+        float dy      = (uv.y - ly) * u_resolution.y / u_view_scale.y;
         float dist    = sqrt(dx * dx + dy * dy);
         float falloff = clamp(1.0 - (dist / max(lradius, 1.0)), 0.0, 1.0);
         falloff       = falloff * falloff;
 
-        float sOcclusion = 0.0;
-        vec2  from_light = uv - vec2(lx, ly);
-        for (float s = 1.0; s < 16.0; s++) {
-            sOcclusion += sample_shadow(vec2(lx, ly) + from_light * (s / 16.0));
+        if (falloff > 0.002) {
+            vec2  from_light = uv - vec2(lx, ly);
+            float jit = hash2(uv * u_resolution + fi) * (0.84 / 13.0);
+            float occ = 0.0;
+            for (int s = 1; s < 13; s++) {
+                occ = max(occ, sample_shadow(vec2(lx, ly) + from_light * (0.08 + jit + 0.84 * (float(s) / 13.0))));
+            }
+            light_accum += u_light_colors[i].rgb * lbright * falloff * (1.0 - occ);
         }
-        float shadow = 1.0 - smoothstep(0.08, 0.35, sOcclusion / 15.0);
-
-        light_accum += u_light_colors[i].rgb * lbright * falloff * shadow * active;
     }
 
     float room_flicker = 1.0
@@ -139,22 +140,24 @@ void main() {
     col.rgb *= clamp(light_accum, 0.0, 2.0);
 
     if (u_player_radius > 0.0) {
-        float pdx = (uv.x - u_player_pos.x) * u_resolution.x;
-        float pdy = (uv.y - u_player_pos.y) * u_resolution.y;
+        float pdx = (uv.x - u_player_pos.x) * u_resolution.x / u_view_scale.x;
+        float pdy = (uv.y - u_player_pos.y) * u_resolution.y / u_view_scale.y;
         float pdist = sqrt(pdx * pdx + pdy * pdy);
 
         float pfalloff = smoothstep(u_player_radius, u_player_radius * 0.65, pdist);
+        float pvis = 0.0;
 
-        vec2 from_player = uv - u_player_pos;
-        float pOcclusion = 0.0;
-        for (float s = 2.0; s < 32.0; s++) {
-            pOcclusion += sample_shadow(u_player_pos + from_player * (s / 32.0));
+        if (pfalloff > 0.002) {
+            vec2  from_player = uv - u_player_pos;
+            float pjit = hash2(uv * u_resolution + 7.3) * (0.86 / 15.0);
+            float pocc = 0.0;
+            for (int s = 1; s < 15; s++) {
+                pocc = max(pocc, sample_shadow(u_player_pos + from_player * (0.06 + pjit + 0.86 * (float(s) / 15.0))));
+            }
+            pvis = 1.0 - pocc;
         }
 
-        float pvis = 1.0 - smoothstep(0.06, 0.30, pOcclusion / 30.0);
-        float visibility = pfalloff * pvis;
-        col.rgb *= max(visibility, 0.02);
+        col.rgb *= max(pfalloff * pvis, 0.06);
     }
-
     gl_FragColor = col;
 }

@@ -49,7 +49,7 @@ for (var i = 0; i < _count; i++) {
 
     _lights_arr[i * 4 + 0] = _lx;
     _lights_arr[i * 4 + 1] = _ly;
-    _lights_arr[i * 4 + 2] = _l.radius * _scale_x;
+    _lights_arr[i * 4 + 2] = _l.radius;
     _lights_arr[i * 4 + 3] = _l.brightness;
     _colors_arr[i * 4 + 0] = _l.cr;
     _colors_arr[i * 4 + 1] = _l.cg;
@@ -64,7 +64,7 @@ var _prpx = 0.0;
 if (player_vision_enabled && _ctrl != noone && instance_exists(_ctrl)) {
     _psx  = (_ctrl.x - _cx) * _scale_x / _sw;
     _psy  = (_ctrl.y - _cy) * _scale_y / _sh;
-    _prpx = player_vision_radius * _scale_x;
+    _prpx = player_vision_radius;
 }
 
 surface_set_target(shadow_surf);
@@ -72,11 +72,19 @@ surface_set_target(shadow_surf);
     draw_set_color(c_white);
     draw_set_alpha(1);
     with (obj_wall) {
-        var _wx1 = (bbox_left   - _cx) * _scale_x;
-        var _wy1 = (bbox_top    - _cy) * _scale_y;
-        var _wx2 = (bbox_right  - _cx) * _scale_x;
-        var _wy2 = (bbox_bottom - _cy) * _scale_y;
-        draw_rectangle(_wx1, _wy1, _wx2, _wy2, false);
+        var _pw = sprite_width;
+        var _ph = sprite_height;
+        var _ca = dcos(image_angle);
+        var _sa = dsin(image_angle);
+        draw_primitive_begin(pr_trianglestrip);
+        for (var k = 0; k < 4; k++) {
+            var _ox = (k == 1 || k == 3) ? _pw : 0;
+            var _oy = (k >= 2) ? _ph : 0;
+            var _wx = x + _ox * _ca + _oy * _sa;
+            var _wy = y - _ox * _sa + _oy * _ca;
+            draw_vertex((_wx - _cx) * _scale_x, (_wy - _cy) * _scale_y);
+        }
+        draw_primitive_end();
     }
 surface_reset_target();
 
@@ -86,6 +94,7 @@ shader_set(shd_vhs_shader);
     gpu_set_tex_filter_ext(uni_shadowmap, false);
     shader_set_uniform_f(uni_time,          _t);
     shader_set_uniform_f(uni_resolution,    _sw, _sh);
+    shader_set_uniform_f(uni_view_scale, _scale_x, _scale_y);	
     shader_set_uniform_f(uni_intensity,     vhs_intensity);
     shader_set_uniform_f(uni_ambient,       ambient_r, ambient_g, ambient_b);
     shader_set_uniform_f(uni_flicker,       flicker_intensity);

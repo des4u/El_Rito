@@ -69,6 +69,6 @@ if (_confirm && !cur_obligatory) {
 }
 
 if (tw_finished && array_length(cur_choices) > 0) {
-    if (keyboard_check_pressed(vk_up))   choice_index = max(0, choice_index - 1);
-    if (keyboard_check_pressed(vk_down)) choice_index = min(array_length(cur_choices) - 1, choice_index + 1);
+    if (keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_up))   choice_index = max(0, choice_index - 1);
+    if (keyboard_check_pressed(ord("S")) || keyboard_check_pressed(vk_down)) choice_index = min(array_length(cur_choices) - 1, choice_index + 1);
 }

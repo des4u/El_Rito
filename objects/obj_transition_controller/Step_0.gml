@@ -6,7 +6,7 @@ if (trans_active) {
     trans_timer    += delta_time / 1000000;
     trans_progress  = clamp(trans_timer / trans_duration, 0.0, 1.0);
 
-    if (!trans_changed && trans_progress >= 0.88) {
+    if (!trans_changed && trans_progress >= ((trans_type == 3) ? 0.999 : 0.88)) {
         trans_changed = true;
         fadein_type   = trans_type;
         if (trans_target != -1) {

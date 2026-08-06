@@ -159,7 +159,7 @@ function party_spawn() {
     global.party_instances = {};
     global.controlled = noone;
 
-    if (room == game_1_presentation || room == game_1_realhistory) { //si, se que es un poco... raro, pero pondre todos los rooms de transición o escenas aquí para evitar bugs
+    if (room == game_1_presentation || room == game_1_realhistory || room == game_1_thebus) { //si, se que es un poco... raro, pero pondre todos los rooms de transición o escenas aquí para evitar bugs
         global.party_traveling = [];
         exit;
     }
@@ -361,6 +361,8 @@ function scr_room_setup() {
             light_set_ambient(0.05, 0.02, 0.02);
         break;
         case rm_sofi:
+			global.room_exterior = false;
+			sun_off();
 			if global.day = false {
 			light_set_ambient(0.02, 0.02, 0.06);
 			obj_shader_controller.flicker_intensity = 2.0;
@@ -372,29 +374,64 @@ function scr_room_setup() {
 			}
         break;
         case rm_sofi_hall:
-			light_set_ambient(0.01, 0.01, 0.05);
+			global.room_exterior = false;
+			sun_off();
+			if global.day = false {
+			light_set_ambient(0.02, 0.02, 0.06);
+			obj_shader_controller.flicker_intensity = 2.0;
+			obj_shader_controller.vhs_target_intensity = 1.2;
+			} else {
+			light_set_ambient(0.6, 0.4, 0.2);
+			obj_shader_controller.flicker_intensity = 0.4;
+			obj_shader_controller.vhs_target_intensity = 0.1;				
+			}
 			break;
 		case rm_sofi_outside_down:
+			global.room_exterior = true;
+			scr_daylight_apply(true);
 			if global.day = true {
 			light_set_ambient(0.8, 0.5, 0.3);
 			} else if global.day = "transitioning" {
-			light_set_ambient(0,0,0, true);	
+			light_set_ambient(0.001,0.001,0.001, true);	
 			}
 		break;
 		case rm_sofi_outside_right:
+			global.room_exterior = true;
+			scr_daylight_apply(true);		
 			if global.day = true {
 			light_set_ambient(0.8, 0.5, 0.3, true);
 			}
 		break;	
 		case rm_sofi_outside_up:
+			global.room_exterior = true;
+			scr_daylight_apply(true);		
 			if global.day = true {
 			light_set_ambient(0.8, 0.5, 0.3, true);
 			}
 		break;	
 		case rm_plaza_kiosco:
-			if global.day = "6pm" {
-			light_set_ambient(0.45, 0.32, 0.22);
-			}
+			global.room_exterior = true;
+			scr_daylight_apply(true);		
+			if (global.day == "6pm") light_set_ambient(0.45, 0.32, 0.22);
+			else                     light_set_ambient(0.50, 0.50, 0.60);
+			break;
+
+		case rm_sofi_kitchen:
+			global.room_exterior = false;
+			sun_off();		
+			break;
+
+		case rm_plaza_arcs:
+			global.room_exterior = true;
+			scr_daylight_apply(true);		
+			break;
+		case rm_plaza_garden:
+			global.room_exterior = true;
+			scr_daylight_apply(true);		
+			break;
+
+		default:
+			light_set_ambient(0.35, 0.35, 0.40);
 			break;
 		}
 }

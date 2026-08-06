@@ -46,18 +46,21 @@ function dialog_next() {
     }
 }
 
-// ─────────────────────────────────────────
-// Iniciar una secuencia de dialogos
-// dialog_start([ linea1, linea2, ... ])
-// ─────────────────────────────────────────
+
 function dialog_start(_lines) {
     with (obj_dialogue_controller) {
         dialog_lines  = _lines;
         dialog_index  = 0;
         dialog_active = true;
         dialog_done   = false;
+        dialog_free   = false;
         _dialog_load_line(0);
     }
+}
+
+function dialog_start_free(_lines) {
+    dialog_start(_lines);
+    with (obj_dialogue_controller) { dialog_free = true; }
 }
 
 // ─────────────────────────────────────────
@@ -164,5 +167,7 @@ function tooltip(_text, _seconds = 3) {
 
 function dialog_blocks_input() {
     if (!obj_dialogue_controller.dialog_active) return false;
+    if (obj_dialogue_controller.dialog_free) return false;
     return !obj_dialogue_controller.cur_is_tooltip;
 }
+

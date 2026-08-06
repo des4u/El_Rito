@@ -1,16 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_window_light",
+  "%Name":"obj_bus_event",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"par_Character","path":"objects/par_Character/par_Character.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_window_light",
+  "name":"obj_bus_event",
   "overriddenProperties":[],
   "parent":{
-    "name":"lighting",
-    "path":"folders/objects/props and lighting/lighting.yy",
+    "name":"props and lighting",
+    "path":"folders/objects/props and lighting.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -29,8 +30,11 @@
   "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
-  "solid":false,
-  "spriteId":null,
+  "solid":true,
+  "spriteId":{
+    "name":"spr_col_4",
+    "path":"sprites/spr_col_4/spr_col_4.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

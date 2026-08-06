@@ -2,6 +2,7 @@ cs_walk_update();
 
 switch (global.sofievent) {
 	case 0:
+		hora_set(2.5);
 		light_set_ambient(0.04, 0.04, 0.12, true);
 		obj_shader_controller.flicker_intensity = 2.0;
 		obj_shader_controller.vhs_target_intensity = 1.2;
@@ -28,7 +29,7 @@ switch (global.sofievent) {
 
 	case 2:
 		dialog_start([
-			dialog_line_timed("Ah... otra vez", "", -1, 0, 2.0)
+			dialog_line_timed("Me lleva", "", -1, 0, 2.0)
 		]);
 		global.sofievent = 3;
 		break;
@@ -55,7 +56,7 @@ switch (global.sofievent) {
 			audio_sound_gain(snd_vhs, 1);
 			if (instance_exists(obj_door)) instance_destroy(obj_door);
 			dialog_start([
-				dialog_line_timed("...", "", -1, 0, 2.0)
+				dialog_line_timed("", "", -1, 0, 2.0)
 			]);
 			global.sofievent = 6.5;
 		}
@@ -69,7 +70,7 @@ switch (global.sofievent) {
 		break;
 
 	case 7:
-		if (cs_walk_done(obj_Sofi)) {
+		if (cs_walk_done(obj_Sofi) && delay(2.0, 904) ) {
 			obj_Sofi.player_vision_enabled = true;
 			cs_walk(obj_Sofi, -57, 209, 4.5);
 			global.sofievent = 8;
@@ -77,21 +78,53 @@ switch (global.sofievent) {
 		break;
 
 	case 8:
-		if (cs_walk_done(obj_Sofi)) global.sofievent = 9;
+		if (cs_walk_done(obj_Sofi) && delay(5.0, 903)) global.sofievent = 9;
 		break;
 
 	case 9:
+		if (instance_exists(obj_haunted_window)) {
+			instance_destroy(obj_haunted_window)
+		}
+		
+		if (instance_exists(obj_window_light)) {
+			instance_destroy(obj_window_light)
+		}	
 		event_set("intro_complete");
-		audio_play_sound(snd_knock, 1, 0);
-		global.day = "transitioning";
+		light_set_ambient(0,0,0,true);
 		party_purge("sofi");
 		party_set(["alberto", "santi", "diana"]);
-		door_goto(rm_sofi_outside_down, "-1");
-		global.sofievent = 9.5;
+		global.sofievent = 9.3;
 		break;
-
+	
+	case 9.3:
+		if (instance_exists(obj_haunted_window)) {
+			instance_destroy(obj_haunted_window)
+		}
+		
+		if (instance_exists(obj_window_light)) {
+			instance_destroy(obj_window_light)
+		}		
+		if !audio_is_playing(snd_knock) {
+			audio_play_sound(snd_knock, 1, 0);
+		}
+		if (delay(2)) global.sofievent = 9.4;
+		break;
+	
+	case 9.4:
+		if (instance_exists(obj_haunted_window)) {
+			instance_destroy(obj_haunted_window)
+		}
+		
+		if (instance_exists(obj_window_light)) {
+			instance_destroy(obj_window_light)
+		}		
+		door_goto(rm_sofi_outside_down, "-1");
+		global.sofievent = 9.5
+		break;
+	
+		
 	case 9.5:
-		if (room == rm_sofi_outside_down && delay(1.2, 902)) global.sofievent = 10;
+		if (room == rm_sofi_outside_down) global.sofievent = 10; global.day = true; hora_set(9) //son las 4 pero para que se vea sombra ps;
 		break;
 
 	case 10:
@@ -111,8 +144,7 @@ switch (global.sofievent) {
 		if (delay(1.0, 903)) {
 			audio_play_sound(snd_knock, 1, 0);
 			audio_sound_gain(snd_knock, 5, 0);
-			global.day = true;
-			light_set_ambient(0.8, 0.5, 0.3);
+
 			global.sofievent = 11.5;
 		}
 		break;
@@ -123,18 +155,17 @@ switch (global.sofievent) {
 
 	case 12:
 		dialog_start([
-			dialog_line("Claro Santiago, tumbale la puerta, porque no.", "??", -1, 0),
+			dialog_line("Seguro esta dormida", "??", -1, 0),
 			dialog_line("Pues que se apure, se nos va a hacer tarde", "Santiago", -1, 0),
 			dialog_line_timed("...", "???", -1, 0, 1.0),
 			dialog_line("¿Alberto podrias entrar a buscar a Sofia?", "Santiago", -1, 0),
 			dialog_line("ah no mames", "Alberto", -1, 0),
 			dialog_line("¿por que yo?", "Alberto", -1, 0),
-			dialog_line("Wey, eres negro", "Santiago", -1, 0),
-			dialog_line("Metete por la ventana como si fueras a robar la casa", "Santiago", -1, 0),
-			dialog_line_timed(" Hijo de...", "Alberto", -1, 0, 1.0),
-			dialog_line_timed("mhm", "Alberto", -1, 0, 2.0),
-			dialog_line_timed("Bueno pero, Diana dile a tu novio que le baje no?", "Alberto", -1, 0, 2.0),
-			double_dialogue_timed("QUE NO ES MI NOVIO", "Diana", -1, 0, "Que ya se esta pasando", "Alberto", -1, 0, 5.0)
+			dialog_line("Porque cabes por la ventana", "Santiago", -1, 0),
+			dialog_line_timed("Aja...", "Alberto", -1, 0, 1.0),
+			dialog_line_timed("¿No sera porque te quieres quedar con tu novia?", "Alberto", -1, 0, 2.0),
+			double_dialogue_timed("QUE NO ES MI NOVIO", "Diana", -1, 0, "'Ta madre", "Santiago", -1, 0, 2.0),
+			dialog_line("Ya alberto apurate", "Diana", -1, 0)			
 		]);
 		global.sofievent = 12.5;
 		break;

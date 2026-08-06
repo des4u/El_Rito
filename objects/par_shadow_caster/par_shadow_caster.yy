@@ -1,16 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_window_light",
+  "%Name":"par_shadow_caster",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_window_light",
+  "name":"par_shadow_caster",
   "overriddenProperties":[],
   "parent":{
-    "name":"lighting",
-    "path":"folders/objects/props and lighting/lighting.yy",
+    "name":"parents",
+    "path":"folders/objects/parents.yy",
   },
   "parentObjectId":null,
   "persistent":false,

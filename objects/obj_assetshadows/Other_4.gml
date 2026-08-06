@@ -1,0 +1,1 @@
+casters = asset_shadows_scan();

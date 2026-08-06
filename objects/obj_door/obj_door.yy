@@ -49,5 +49,5 @@
     "path":"sprites/spr_door_mask/spr_door_mask.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }
